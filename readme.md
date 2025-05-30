@@ -118,3 +118,13 @@ Follow PEP 8 and other style guidelines, use clear and concise commit messages a
 ### Task 9: Deployment
 
 Deploy this project to DigitalOcean or any other VPS. 
+
+---------------------------------------------------------------------
+
+## Project setup
+
+- Make sure you have **pyenv** and **Poetry** installed on your system
+- Make sure the **pyenv** has installed the Python version specified in `.python-version` file. If not - just add it by running `pyenv install <#.#.#>`
+- Install the Poetry Shell plugin: `poetry self add poetry-plugin-shell` 
+- (Optional) If you want to store the project virtual environment in its root folder then create it with `python -m venv .venv` command executed in project root. Otherwise Poetry Shell will create the project venv in its USERPROFILE cache folder.
+
