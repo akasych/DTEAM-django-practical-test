@@ -123,6 +123,8 @@ Deploy this project to DigitalOcean or any other VPS.
 
 ## Project setup
 
+### Setup tools and environment
+
 - Make sure you have **pyenv** and **Poetry** installed on your system
 - Make sure the **pyenv** has installed the Python version specified in `.python-version` file. If not - just add it by running `pyenv install <#.#.#>`
 - Install the Poetry Shell plugin: `poetry self add poetry-plugin-shell` 
@@ -130,8 +132,14 @@ Deploy this project to DigitalOcean or any other VPS.
 - Activate virtual environment: `poetry shell`
 - Install project dependencies: `poetry install`
 
+### Load sample data
+
+- The folder `fixtures` in the project root contains sample data for initial database population. Load the fixures with command
+`poetry run python CVProject/manage.py loaddata fixtures/all_data.json`
 
 ## Starting the Django webserver
 
 - open the project root folder in console and run command:
-`poetry run python manage.py runserver`
+`poetry run python CVProject/manage.py runserver`
+- open the web application in browser:  http://127.0.0.1:8000/
+- access the administration page http://127.0.0.1:8000/admin/ with credentials: `admin/admin`

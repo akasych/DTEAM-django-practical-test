@@ -8,8 +8,11 @@ class CVDoc(models.Model):
     phone = models.CharField(max_length=20, default='', blank=True)
     bio = models.TextField(max_length=500, default='', blank=True)
 
+    def get_full_name(self) -> str:
+        return f"{self.firstname} {self.lastname}"
+
     def __str__(self):
-        return f"CV of {self.firstname} {self.lastname}"
+        return f"{self.get_full_name()} CV"
 
 
 class Project(models.Model):
@@ -20,7 +23,7 @@ class Project(models.Model):
     cvDoc = models.ForeignKey(CVDoc, on_delete=models.CASCADE, related_name='projects')
 
     def __str__(self):
-        return f"Project {self.title}"
+        return f"{self.cvDoc.get_full_name()}'s project {self.title}"
 
 
 class Skill(models.Model):
@@ -29,4 +32,4 @@ class Skill(models.Model):
     cvDoc = models.ForeignKey(CVDoc, on_delete=models.CASCADE, related_name='skills')
 
     def __str__(self):
-        return f"{self.title}: {self.experience} years"
+        return f"{self.cvDoc.get_full_name()} {self.title}: {self.experience} years"
