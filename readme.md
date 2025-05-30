@@ -127,4 +127,5 @@ Deploy this project to DigitalOcean or any other VPS.
 - Make sure the **pyenv** has installed the Python version specified in `.python-version` file. If not - just add it by running `pyenv install <#.#.#>`
 - Install the Poetry Shell plugin: `poetry self add poetry-plugin-shell` 
 - (Optional) If you want to store the project virtual environment in its root folder then create it with `python -m venv .venv` command executed in project root. Otherwise Poetry Shell will create the project venv in its USERPROFILE cache folder.
-
+- Activate virtual environment: `poetry shell`
+- Install project dependencies: `poetry install`
