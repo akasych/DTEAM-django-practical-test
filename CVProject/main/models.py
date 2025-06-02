@@ -10,7 +10,7 @@ class CVDoc(models.Model):
     lastname = models.CharField(max_length=120)
     email = models.CharField(max_length=120)
     phone = models.CharField(max_length=20, default='', blank=True)
-    bio = models.TextField(max_length=500, default='', blank=True)
+    profession = models.CharField(max_length=100, default='', blank=True)
 
     def get_full_name(self) -> str:
         return f"{self.firstname} {self.lastname}"
@@ -20,6 +20,8 @@ class CVDoc(models.Model):
 
 
 class Project(models.Model):
+    class Meta:
+        ordering = ['startDate']
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=400)
     startDate = models.DateField()
