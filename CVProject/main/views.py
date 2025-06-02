@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
-from .models import CVDoc
+from .models import CVDoc, Skill, Project
 
 def home_page(request):
     all_cvs: [str] = list_all_cvs()
