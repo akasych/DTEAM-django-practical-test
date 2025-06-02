@@ -10,8 +10,19 @@
 <body>
 
     <h1>DTEAM - Django Developer Practical Test</h1>
-    <div class="content">
-        <h3>Available CVs:</h3>
+
+    <div class="container">
+    <div class="main-body">
+
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">List CVs</li>
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+
         <div class="list-group">
          {% for cv in all_cvs %}
             <a href="/cv/{{cv.id}}" class="list-group-item list-group-item-action" aria-current="true">
@@ -19,6 +30,7 @@
             </a>
          {% endfor %}
         </div>
+    </div>
     </div>
 
 
