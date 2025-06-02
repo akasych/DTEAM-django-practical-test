@@ -137,6 +137,11 @@ Deploy this project to DigitalOcean or any other VPS.
 - The folder `fixtures` in the project root contains sample data for initial database population. Load the fixures with command
 `poetry run python CVProject/manage.py loaddata fixtures/all_data.json`
 
+### Testing the project
+
+- open the project root folder in console and run command:
+`poetry run python CVProject/manage.py test main`
+
 ## Starting the Django webserver
 
 - open the project root folder in console and run command:
