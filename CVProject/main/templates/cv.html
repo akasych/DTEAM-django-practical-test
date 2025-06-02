@@ -8,18 +8,9 @@
     <link href="{% static '/styles.css' %}"  type="text/css" rel="stylesheet" />
 </head>
 <body>
-
     <h1>DTEAM - Django Developer Practical Test</h1>
-    <div class="content">
-        <h3>Available CVs:</h3>
-        <div class="list-group">
-         {% for cv in all_cvs %}
-            <a href="/cv/{{cv.id}}" class="list-group-item list-group-item-action" aria-current="true">
-                {{cv.name}}
-            </a>
-         {% endfor %}
-        </div>
-    </div>
+
+    <h4>{{fullname}}</h4>
 
 
 

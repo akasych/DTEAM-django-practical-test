@@ -2,6 +2,10 @@ from django.db import models
 
 
 class CVDoc(models.Model):
+    class Meta:
+        indexes = [
+            models.Index(fields=['id', 'lastname'])
+        ]
     firstname = models.CharField(max_length=120)
     lastname = models.CharField(max_length=120)
     email = models.CharField(max_length=120)
