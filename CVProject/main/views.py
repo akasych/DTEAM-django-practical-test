@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import Http404
-from .models import CVDoc, Skill, Project
+from django.http import Http404, HttpResponse
+from django_xhtml2pdf.utils import generate_pdf
+from .models import CVDoc
+
 
 def home_page(request):
     all_cvs: [str] = list_all_cvs()
@@ -10,6 +12,14 @@ def home_page(request):
 def cv_page(request, cv_id):
     cv: CVDoc = get_cv(cv_id)
     return render(request, template_name="cv.html", context={"cv": cv, "fullname": cv.get_full_name()})
+
+
+def cv_pdf(request, cv_id, file_name):
+    cv: CVDoc = get_cv(cv_id)
+    context = {"cv": cv, "fullname": cv.get_full_name()}
+    resp = HttpResponse(content_type='application/pdf')
+    result = generate_pdf(template_name='cv_pdf.html', context=context, file_object=resp)
+    return result
 
 
 def list_all_cvs() -> [dict]:
