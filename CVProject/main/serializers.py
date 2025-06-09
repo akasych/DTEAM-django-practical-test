@@ -1,3 +1,4 @@
+from django.db import transaction
 from functools import reduce
 from rest_framework import serializers
 from . import models
@@ -34,11 +35,12 @@ class CVDocSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         skills_data = validated_data.pop('skills')
         projects_data = validated_data.pop('projects')
-        cv_doc = models.CVDoc.objects.create(**validated_data)
-        for skill in skills_data:
-            models.Skill.objects.create(cvDoc=cv_doc, **skill)
-        for project in projects_data:
-            models.Project.objects.create(cvDoc=cv_doc, **project)
+        with transaction.atomic():
+            cv_doc = models.CVDoc.objects.create(**validated_data)
+            for skill in skills_data:
+                models.Skill.objects.create(cvDoc=cv_doc, **skill)
+            for project in projects_data:
+                models.Project.objects.create(cvDoc=cv_doc, **project)
         return cv_doc
 
     def update(self, cv_doc, validated_data):
@@ -48,18 +50,18 @@ class CVDocSerializer(serializers.ModelSerializer):
         if 'projects' in validated_data:
             projects_data = validated_data.pop('projects')
 
-        cv_doc = super().update(cv_doc, validated_data)
+        with transaction.atomic():
+            cv_doc = super().update(cv_doc, validated_data)
 
-        # Overwrite existing skills and projects if such fields are present in request
-        if skills_data is not None:
-            cv_doc.skills.all().delete()
-            for skill in skills_data:
-                models.Skill.objects.create(cvDoc=cv_doc, **skill)
-
-        if projects_data is not None:
-            cv_doc.projects.all().delete()
-            for project in projects_data:
-                models.Project.objects.create(cvDoc=cv_doc, **project)
+            # Overwrite existing skills and projects if such fields are present in request
+            if skills_data is not None:
+                cv_doc.skills.all().delete()
+                for skill in skills_data:
+                    models.Skill.objects.create(cvDoc=cv_doc, **skill)
+            if projects_data is not None:
+                cv_doc.projects.all().delete()
+                for project in projects_data:
+                    models.Project.objects.create(cvDoc=cv_doc, **project)
 
         return cv_doc
 
