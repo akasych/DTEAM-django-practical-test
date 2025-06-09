@@ -142,9 +142,17 @@ Deploy this project to DigitalOcean or any other VPS.
 - open the project root folder in console and run command:
 `poetry run python CVProject/manage.py test main`
 
-## Starting the Django webserver
+## Starting the Django webserver locally
 
 - open the project root folder in console and run command:
 `poetry run python CVProject/manage.py runserver`
 - open the web application in browser:  http://127.0.0.1:8000/
 - access the administration page http://127.0.0.1:8000/admin/ with credentials: `admin/admin`
+
+
+## Starting the Django webserver in Docker container
+
+- make sure you have Docker installed on your system
+- open the project root folder in console and run command:
+`docker-compose up --build`
+- open the web application in browser:  http://127.0.0.1:8000/
