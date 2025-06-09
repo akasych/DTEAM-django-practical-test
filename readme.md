@@ -135,7 +135,7 @@ Deploy this project to DigitalOcean or any other VPS.
 ### Load sample data
 
 - The folder `fixtures` in the project root contains sample data for initial database population. Load the fixures with command
-`poetry run python CVProject/manage.py loaddata fixtures/all_data.json`
+`poetry run python CVProject/manage.py loaddata fixtures/cv_data.json`
 
 ### Testing the project
 
