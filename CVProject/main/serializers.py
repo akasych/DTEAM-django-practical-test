@@ -1,3 +1,4 @@
+from functools import reduce
 from rest_framework import serializers
 from . import models
 
@@ -17,6 +18,14 @@ class ProjectSerializer(serializers.ModelSerializer):
 class CVDocSerializer(serializers.ModelSerializer):
     skills = SkillSerializer(many=True)
     projects = ProjectSerializer(many=True)
+    total_experience = serializers.SerializerMethodField()
+
+    def get_total_experience(self, obj):
+        skills = obj.skills.all()
+        if not skills:
+            return 0
+        max_skill = reduce(lambda a, b: a if a.experience > b.experience else b, skills)
+        return max_skill.experience
 
     class Meta:
         model = models.CVDoc
