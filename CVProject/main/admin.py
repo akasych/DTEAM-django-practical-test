@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CVDoc, Project, Skill
+from .models import CVDoc, Project, Skill, RequestLog
 
 
 class ProjectInline(admin.StackedInline):
@@ -13,6 +13,7 @@ class SkillInline(admin.StackedInline):
 
 admin.site.register(Project)
 admin.site.register(Skill)
+admin.site.register(RequestLog)
 
 
 @admin.register(CVDoc)

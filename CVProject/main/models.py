@@ -39,3 +39,14 @@ class Skill(models.Model):
 
     def __str__(self):
         return f"{self.cvDoc.get_full_name()} {self.title}: {self.experience} years"
+
+
+class RequestLog(models.Model):
+    method = models.CharField(max_length=10)
+    url = models.TextField()
+    remote_ip = models.CharField(max_length=15)
+    response_status = models.IntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.method} {self.url} at {self.timestamp} from {self.remote_ip}"
