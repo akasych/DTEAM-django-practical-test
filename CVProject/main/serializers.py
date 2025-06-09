@@ -5,13 +5,13 @@ from . import models
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Skill
-        fields = '__all__'
+        fields = ('title', 'experience')
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Project
-        fields = '__all__'
+        fields = ('title', 'description', 'startDate', 'endDate')
 
 
 class CVDocSerializer(serializers.ModelSerializer):
