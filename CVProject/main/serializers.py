@@ -16,8 +16,8 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class CVDocSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(many=True)
-    projects = ProjectSerializer(many=True)
+    skills = SkillSerializer(many=True, required=False)
+    projects = ProjectSerializer(many=True, required=False)
     total_experience = serializers.SerializerMethodField(method_name='get_total_experience')
 
     class Meta:
@@ -41,11 +41,25 @@ class CVDocSerializer(serializers.ModelSerializer):
             models.Project.objects.create(cvDoc=cv_doc, **project)
         return cv_doc
 
-    def update(self, instance, validated_data):
-        # TODO: implement nested objects update. Ignoring them for now
-        validated_data.pop("skills")
-        validated_data.pop("projects")
+    def update(self, cv_doc, validated_data):
+        skills_data, projects_data = None, None
+        if 'skills' in validated_data:
+            skills_data = validated_data.pop('skills')
+        if 'projects' in validated_data:
+            projects_data = validated_data.pop('projects')
 
-        instance = super().update(instance, validated_data)
-        return instance
+        cv_doc = super().update(cv_doc, validated_data)
+
+        # Overwrite existing skills and projects if such fields are present in request
+        if skills_data is not None:
+            cv_doc.skills.all().delete()
+            for skill in skills_data:
+                models.Skill.objects.create(cvDoc=cv_doc, **skill)
+
+        if projects_data is not None:
+            cv_doc.projects.all().delete()
+            for project in projects_data:
+                models.Project.objects.create(cvDoc=cv_doc, **project)
+
+        return cv_doc
 
