@@ -7,12 +7,13 @@ class RequestLoggingMiddleware(MiddlewareMixin):
     def process_request(self, request):
         request._method = request.method
         request._url = request.path
-        request._remote_host = request.META.get('REMOTE_HOST')
+        if request.META.get('REMOTE_HOST'):
+            request._remote_host = request.META.get('REMOTE_HOST')
 
     def process_response(self, request, response):
-        method = getattr(request, '_method', '')
-        url = getattr(request, '_url', '')
-        remote_host = getattr(request, '_remote_host', '')
+        method = getattr(request, '_method', '<METHOD>')
+        url = getattr(request, '_url', '<unknown>')
+        remote_host = getattr(request, '_remote_host', '<localhost>')
         response_status = response.status_code
 
         RequestLog.objects.create(

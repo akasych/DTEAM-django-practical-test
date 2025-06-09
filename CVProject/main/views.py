@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django_xhtml2pdf.utils import generate_pdf
-from .models import CVDoc
+from .models import CVDoc, RequestLog
 
 
 def home_page(request):
@@ -12,6 +12,11 @@ def home_page(request):
 def cv_page(request, cv_id):
     cv: CVDoc = get_cv(cv_id)
     return render(request, template_name="cv.html", context={"cv": cv, "fullname": cv.get_full_name()})
+
+
+def log_page(request):
+    logs = RequestLog.objects.all().order_by('-timestamp')[:10]
+    return render(request, template_name="logs.html", context={"logs": logs})
 
 
 def cv_pdf(request, cv_id, file_name):

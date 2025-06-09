@@ -49,4 +49,5 @@ class RequestLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.method} {self.url} at {self.timestamp} from {self.remote_ip}"
+        timestamp_str = self.timestamp.strftime("%Y-%m-%d  %H:%M:%S")
+        return f" Status: {self.response_status} | {self.method} {self.url} at [{timestamp_str}] from {self.remote_ip}."
