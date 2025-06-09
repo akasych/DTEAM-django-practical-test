@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import CVDoc, Skill
+from ..models import CVDoc, Skill
 
 
 class TestListView(TestCase):
@@ -49,3 +49,4 @@ class TestDetailView(TestCase):
     def test_page_list_skills(self):
         response = self.client.get(f"/cv/{self.cv.id}")
         self.assertContains(response, "Python: 3 years")
+
