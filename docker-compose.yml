@@ -2,12 +2,10 @@
 services:
   db:
     image: postgres
-    environment:
-      POSTGRES_DB: cvdb
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+    env_file:
+      - .env
 
   web:
     build: ./CVProject
@@ -20,3 +18,5 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    env_file:
+      - .env
