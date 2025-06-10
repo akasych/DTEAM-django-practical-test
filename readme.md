@@ -88,7 +88,13 @@ Follow PEP 8 and other style guidelines, use clear and concise commit messages a
 
 - - Ensure your tests verify the logging functionality.
 
-### Task 5: Template Context Processors
+### Task 5: Docker Basics
+
+1. Use Docker Compose to containerize your project.
+2. Switch the database from SQLite to PostgreSQL in Docker Compose.
+3. Store all necessary environment variables (database credentials, etc.) in a .env file.
+
+### Task 6: Template Context Processors
 
 1. **Create** settings_context
     - Create a context processor that injects your entire Django settings into all templates.
@@ -96,12 +102,6 @@ Follow PEP 8 and other style guidelines, use clear and concise commit messages a
 ##### Settings Page
 
 - - Create a view (e.g., /settings/) that displays DEBUG and other settings values made available by the context processor.
-
-### Task 6: Docker Basics
-
-1. Use Docker Compose to containerize your project.
-2. Switch the database from SQLite to PostgreSQL in Docker Compose.
-3. Store all necessary environment variables (database credentials, etc.) in a .env file.
 
 ### Task 7: Celery Basics
 
