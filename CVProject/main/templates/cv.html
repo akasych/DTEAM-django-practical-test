@@ -96,7 +96,18 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                      <a class="btn btn-info" target="_blank" href="/cv-pdf/{{cv.id}}/{{cv.firstname}}{{cv.lastname}}CV.pdf">Download PDF</a>
+                        <a class="btn btn-info" target="_blank" href="/cv-pdf/{{cv.id}}/{{cv.firstname}}{{cv.lastname}}CV.pdf">Download CV as PDF</a>
+                        <div class="email">
+                        {% if not email_sent_to %}
+                            <form action="/cv/{{cv.id}}/" method="post">
+                                {% csrf_token %}
+                                <input type="text" name="email" placeholder="enter your email here..." />
+                                <button type="submit" class="btn btn-info" >Send PDF</button>
+                            </form>
+                        {% else %}
+                            <span class="mb-0">Email has been sent to {{ email_sent_to }}</span>
+                        {% endif %}
+                        </div>
                     </div>
                   </div>
                 </div>

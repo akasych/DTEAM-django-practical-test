@@ -5,6 +5,6 @@ from celery import shared_task
 
 @shared_task
 def send_cv_to_email(cv_pdf, cv_name, cv_email):
-    subject = f"DTEAM Test: {cv_name} CV Profile"
-    message = "Please find your CV PDF attached"
+    subject = f"DTEAM Test: {cv_name} CV Profile PDF"
+    message = f"Please find {cv_name}'s CV attached"
     return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [cv_email])

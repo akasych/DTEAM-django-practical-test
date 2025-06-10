@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponse
 from django_xhtml2pdf.utils import generate_pdf
 from .models import CVDoc, RequestLog
-
+from .tasks import send_cv_to_email
 
 def home_page(request):
     all_cvs: [str] = list_all_cvs()
@@ -11,7 +11,19 @@ def home_page(request):
 
 def cv_page(request, cv_id):
     cv: CVDoc = get_cv(cv_id)
-    return render(request, template_name="cv.html", context={"cv": cv, "fullname": cv.get_full_name()})
+    context = {
+        "cv": cv,
+        "fullname": cv.get_full_name()
+    }
+    # Send email
+    if request.POST and request.POST['email']:
+        email = request.POST['email']
+        pdf = generate_pdf(template_name='cv_pdf.html', context=context)
+        # TODO: provide real pdf file when file attaching gets implemented
+        send_cv_to_email.delay("pdf", cv.get_full_name(), email)
+        context['email_sent_to'] = email
+
+    return render(request, template_name="cv.html", context=context)
 
 
 def log_page(request):
