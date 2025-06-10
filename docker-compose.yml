@@ -7,6 +7,16 @@ services:
     env_file:
       - .env
 
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=password
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=16
+
   web:
     build: ./CVProject
     command: >
@@ -18,5 +28,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
     env_file:
       - .env
