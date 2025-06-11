@@ -13,8 +13,13 @@ class CVDoc(models.Model):
     phone = models.CharField(max_length=20, default='', blank=True)
     profession = models.CharField(max_length=100, default='', blank=True)
 
-    def get_full_name(self) -> str:
+    @property
+    def full_name(self) -> str:
         return f"{self.firstname} {self.lastname}"
+
+    @property
+    def pdf_file_name(self) -> str:
+        return f"{self.firstname}{self.lastname}CV.pdf"
 
     def __str__(self):
         return f"{self.get_full_name()} CV"
