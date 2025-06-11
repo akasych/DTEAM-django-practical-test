@@ -139,8 +139,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = "redis://redis:6379/1"
+# CELERY_BROKER_URL = env('CELERY_BROKER_URL')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_PORT = env('EMAIL_HOST_PORT')
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 DEFAULT_FROM_EMAIL = f'Awesome {env("EMAIL_FROM_ADDRESS")}'
