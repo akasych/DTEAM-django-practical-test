@@ -6,6 +6,6 @@ urlpatterns = [
     path('',  home_page),
     path('logs/',  log_page),
     path('settings/',  settings_page),
-    path('cv/<int:cv_id>',  cv_page),
+    path('cv/<int:cv_id>/',  cv_page),
     path('cv-pdf/<int:cv_id>/<str:file_name>',  cv_pdf),
 ]
