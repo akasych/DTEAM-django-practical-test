@@ -31,6 +31,10 @@ def log_page(request):
     return render(request, template_name="logs.html", context={"logs": logs})
 
 
+def settings_page(request):
+    return render(request, template_name="settings.html")
+
+
 def cv_pdf(request, cv_id, file_name):
     cv: CVDoc = get_cv(cv_id)
     context = {"cv": cv, "fullname": cv.get_full_name()}

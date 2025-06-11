@@ -18,31 +18,19 @@
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="/">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">List CVs</li>
+              <li class="breadcrumb-item active" aria-current="page">Application Settings</li>
             </ol>
           </nav>
           <!-- /Breadcrumb -->
 
         <div class="list-group">
-         {% for cv in all_cvs %}
-            <a href="/cv/{{cv.id}}" class="list-group-item list-group-item-action" aria-current="true">
-                {{cv.name}}
-            </a>
+         {% for key, value in settings.items %}
+            <p class="list-group-item list-group-item-action" aria-current="true">
+                {{ key }} = {{ value }}
+            </p>
          {% endfor %}
         </div>
     </div>
-
-        <!-- Footer -->
-    <nav aria-label="breadcrumb" class="main-breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/logs">Request Logs</a></li>
-        </ol>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/settings">Application Settings</a></li>
-        </ol>
-    </nav>
-        <!-- /Footer -->
-
     </div>
 
 
