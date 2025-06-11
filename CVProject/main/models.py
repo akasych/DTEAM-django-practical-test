@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class CVDoc(models.Model):
@@ -49,5 +50,6 @@ class RequestLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        timestamp_str = self.timestamp.strftime("%Y-%m-%d  %H:%M:%S")
+        timestamp_loc = timezone.localtime(self.timestamp)
+        timestamp_str = timestamp_loc.strftime("%Y-%m-%d  %H:%M:%S")
         return f" Status: {self.response_status} | {self.method} {self.url} at [{timestamp_str}] from {self.remote_ip}."
