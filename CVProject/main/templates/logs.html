@@ -1,29 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>DTEAM - Django Developer Practical Test</title>
-    <link href="{% static '/favicon.ico' %}"  type="image/x-icon" rel="icon" />
-    <link href="{% static '/bootstrap.min.css' %}"  type="text/css" rel="stylesheet" />
-    <link href="{% static '/styles.css' %}"  type="text/css" rel="stylesheet" />
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>DTEAM - Django Developer Practical Test</h1>
-
-    <div class="container">
-    <div class="main-body">
-
-          <!-- Breadcrumb -->
-          <nav aria-label="breadcrumb" class="main-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">Home</a></li>
+{% block breadcrumbs %}
               <li class="breadcrumb-item active" aria-current="page">Logs</li>
-            </ol>
-          </nav>
-          <!-- /Breadcrumb -->
+{% endblock %}
 
+
+{% block content %}
         <div class="list-group">
          {% for log_item in logs %}
             <p class="list-group-item list-group-item-action" aria-current="true">
@@ -31,10 +13,4 @@
             </p>
          {% endfor %}
         </div>
-    </div>
-    </div>
-
-
-
-</body>
-</html>
+{% endblock %}

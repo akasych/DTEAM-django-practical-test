@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}DTEAM - Django Developer Practical Test{% endblock %}</title>
+    <link href="{% static '/favicon.ico' %}"  type="image/x-icon" rel="icon" />
+    <link href="{% static '/bootstrap.min.css' %}"  type="text/css" rel="stylesheet" />
+    <link href="{% static '/styles.css' %}"  type="text/css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>{% block header %}DTEAM - Django Developer Practical Test{% endblock %}</h1>
+
+    <div class="container">
+    <div class="main-body">
+
+          <!-- Breadcrumb -->
+          <nav aria-label="breadcrumb" class="main-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+                {% block breadcrumbs %}
+                {% endblock %}
+            </ol>
+          </nav>
+          <!-- /Breadcrumb -->
+
+                {% block content %}
+                {% endblock %}
+      </div>
+                {% block footer %}
+                {% endblock %}
+    </div>
+</body>
+</html>
