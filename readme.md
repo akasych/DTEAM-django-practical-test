@@ -121,7 +121,7 @@ Deploy this project to DigitalOcean or any other VPS.
 
 ---------------------------------------------------------------------
 
-## Project setup
+# Project setup
 
 ### Setup tools and environment
 
@@ -153,6 +153,10 @@ Deploy this project to DigitalOcean or any other VPS.
 ## Starting the Django webserver in Docker container
 
 - make sure you have Docker installed on your system
+- open the `.env.new` file in text editor and set appropriate Database and SMTP Email server configuration.
+Save the file with a new name: `.env`
+
+
 - open the project root folder in console and run command:
 `docker-compose up --build`
 - open the web application in browser:  http://127.0.0.1:8000/
