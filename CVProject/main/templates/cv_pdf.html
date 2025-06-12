@@ -4,11 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CV Profile - {{cv.full_name}}</title>
+    <title>{{ bundles.PAGE_CV }} - {{cv.full_name}}</title>
     <link href="{% static '/styles-pdf.css' %}"  type="text/css" rel="stylesheet" />
 </head>
 <body>
-    <h1>CV Profile - {{cv.full_name}}</h1>
+    <h1>{{ bundles.PAGE_CV }} - {{cv.full_name}}</h1>
     <table>
         <tr>
             <td>
@@ -16,22 +16,22 @@
             </td>
             <td>
 {% if cv.profession %}
-                <span class="section-title text-primary mb-3 mb-sm-4">Profession:</span>
+                <span class="section-title text-primary mb-3 mb-sm-4">{{ bundles.CV_PROFESSION }}:</span>
                 <p class="media-body">{{cv.profession}}</p>
                 <hr>
 {% endif %}
 {% if cv.phone %}
-                <span class="section-title text-primary mb-3 mb-sm-4">Phone:</span>
+                <span class="section-title text-primary mb-3 mb-sm-4">{{ bundles.CV_PHONE }}:</span>
                 <p class="media-body">{{cv.phone}}</p>
                 <hr>
 {% endif %}
-                <span class="section-title text-primary mb-3 mb-sm-4">Email:</span>
+                <span class="section-title text-primary mb-3 mb-sm-4">{{ bundles.CV_EMAIL }}:</span>
                 <p class="media-body">{{cv.email}}</p>
                 <hr>
-                <span class="section-title text-primary mb-3 mb-sm-4">Skills:</span>
+                <span class="section-title text-primary mb-3 mb-sm-4">{{ bundles.CV_SKILLS }}:</span>
                   <ul style="left: 50px">
                       {% for skill in cv.skills.all %}
-                      <li style="margin: 5px 0px;"><b>{{ skill.title }}:</b> <i>{{ skill.experience }} years</i></li>
+                      <li style="margin: 5px 0px;"><b>{{ skill.title }}:</b> <i>{{ skill.experience }} {{ bundles.CV_YEARS }}</i></li>
                       {% endfor%}
                   </ul>
             </td>
@@ -39,7 +39,7 @@
     </table>
 
         <div class="mb-2 mt-2 pt-1" style="padding-top: 50px">
-          <h2 class="font-weight-normal">Personal Experience:</h2>
+          <h2 class="font-weight-normal">{{ bundles.CV_PERSONAL_EXPERIENCE }}:</h2>
         </div>
 {% with cv.projects.all as projects %}
 {% if projects %}
@@ -48,9 +48,9 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th width="5%">#</th>
-                                    <th width="45%">Project Name</th>
-                                    <th width="25%">Start Date</th>
-                                    <th width="25%">Due Date</th>
+                                    <th width="45%">{{ bundles.CV_PROJECT_NAME }}</th>
+                                    <th width="25%">{{ bundles.CV_PROJECT_START }}</th>
+                                    <th width="25%">{{ bundles.CV_PROJECT_END }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,9 +67,6 @@
                     </div>
 {% endif %}
 {% endwith %}
-      </div>
-    </div>
-  </div>
 
 </body>
 </html>

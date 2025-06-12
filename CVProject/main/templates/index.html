@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
-{% block title %}DTEAM - Django Developer Practical Test{% endblock %}
-
 {% block breadcrumbs %}
-              <li class="breadcrumb-item active" aria-current="page">List CVs</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ bundles.PAGE_CV_LIST }}</li>
 {% endblock %}
 
 
@@ -22,10 +20,10 @@
     <!-- Footer -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/logs/">Request Logs</a></li>
+            <li class="breadcrumb-item"><a href="/logs/">{{ bundles.PAGE_LOGS }}</a></li>
         </ol>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/settings/">Application Settings</a></li>
+            <li class="breadcrumb-item"><a href="/settings/">{{ bundles.PAGE_SETTINGS }}</a></li>
         </ol>
     </nav>
     <!-- /Footer -->

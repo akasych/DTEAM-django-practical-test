@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block breadcrumbs %}
-              <li class="breadcrumb-item active" aria-current="page">CV Profile - {{cv.full_name}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ bundles.PAGE_CV }} - {{cv.full_name}}</li>
 {% endblock %}
 
 
@@ -24,10 +24,10 @@
                 <div class="col-sm-12 mb-12">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">experience:</i>Skills</h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">{{ bundles.CV_EXPERIENCE }}:</i>{{ bundles.CV_SKILLS }}</h6>
                       {% with skill_max=20 %}
                       {% for skill in cv.skills.all %}
-                      <small>{{ skill.title }}: {{ skill.experience }} years</small>
+                      <small>{{ skill.title }}: {{ skill.experience }} {{ bundles.CV_YEARS }}</small>
                       <div class="progress mb-3" style="height: 5px">
                         <div class="progress-bar bg-primary" role="progressbar" style="width: {{ skill.experience }}%" aria-valuenow="{{ skill.experience }}" aria-valuemin="0" aria-valuemax="{{skill_max}}"></div>
                       </div>
@@ -44,7 +44,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">First Name</h6>
+                      <h6 class="mb-0">{{ bundles.CV_FIRST_NAME }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                         {{cv.firstname}}
@@ -53,7 +53,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Last Name</h6>
+                      <h6 class="mb-0">{{ bundles.CV_LAST_NAME }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{cv.lastname}}
@@ -62,7 +62,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Email</h6>
+                      <h6 class="mb-0">{{ bundles.CV_EMAIL }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{cv.email}}
@@ -71,7 +71,7 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Phone</h6>
+                      <h6 class="mb-0">{{ bundles.CV_PHONE }}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{cv.phone}}
@@ -80,16 +80,16 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                        <a class="btn btn-info" target="_blank" href="/cv-pdf/{{cv.id}}/{{cv.pdf_file_name}}">Download CV as PDF</a>
+                        <a class="btn btn-info" target="_blank" href="/cv-pdf/{{cv.id}}/{{cv.pdf_file_name}}">{{ bundles.BUTTON_DOWNLOAD_CV_PDF }}</a>
                         <div class="email">
                         {% if not email_sent_to %}
                             <form action="/cv/{{cv.id}}/" method="post">
                                 {% csrf_token %}
-                                <input type="text" name="email" placeholder="enter your email here..." />
-                                <button type="submit" class="btn btn-info" >Send PDF</button>
+                                <input type="text" name="email" placeholder="{{ bundles.INPUT_EMAIL_ENTER }}..." />
+                                <button type="submit" class="btn btn-info" >{{ bundles.BUTTON_SEND_PDF }}</button>
                             </form>
                         {% else %}
-                            <span class="mb-0">Email has been sent to {{ email_sent_to }}</span>
+                            <span class="mb-0">{{ bundles.INPUT_EMAIL_SENT }} {{ email_sent_to }}</span>
                         {% endif %}
                         </div>
                     </div>
@@ -101,20 +101,20 @@
                 <div class="col-sm-12 mb-12">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">experience:</i>Projects</h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">{{ bundles.CV_EXPERIENCE }}:</i>{{ bundles.CV_PROJECTS }}</h6>
 
 {% with cv.projects.all as projects %}
 {% if projects %}
                     <h5 class="mb-3 mt-4 text-uppercase"><i class="mdi mdi-cards-variant mr-1"></i>
-                        Projects</h5>
+                        {{ bundles.CV_PROJECTS }}</h5>
                     <div class="table-responsive">
                         <table class="table table-borderless mb-0">
                             <thead class="thead-light">
                                 <tr>
                                     <th>#</th>
-                                    <th>Project Name</th>
-                                    <th>Start Date</th>
-                                    <th>Due Date</th>
+                                    <th>{{ bundles.CV_PROJECT_NAME }}</th>
+                                    <th>{{ bundles.CV_PROJECT_START }}</th>
+                                    <th>{{ bundles.CV_PROJECT_END }}</th>
                                 </tr>
                             </thead>
                             <tbody>

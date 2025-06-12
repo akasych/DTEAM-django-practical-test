@@ -3,6 +3,7 @@ from django.http import Http404, HttpResponse
 from django_xhtml2pdf.utils import generate_pdf
 from .models import CVDoc, RequestLog
 from .tasks import send_cv_to_email
+from .i18n.bundle import bundles
 
 
 def home_page(request):
@@ -12,7 +13,10 @@ def home_page(request):
 
 def cv_page(request, cv_id):
     cv: CVDoc = get_cv(cv_id)
-    context = {"cv": cv}
+    context = {
+        "cv": cv,
+        "bundles": bundles
+    }
 
     # Send email if POST request is received
     if request.POST and request.POST['email']:
@@ -35,7 +39,10 @@ def settings_page(request):
 
 def cv_pdf(request, cv_id, file_name):
     cv: CVDoc = get_cv(cv_id)
-    context = {"cv": cv}
+    context = {
+        "cv": cv,
+        "bundles": bundles
+    }
     resp = HttpResponse(content_type='application/pdf')
     result = generate_pdf(template_name='cv_pdf.html', context=context, file_object=resp)
     return result

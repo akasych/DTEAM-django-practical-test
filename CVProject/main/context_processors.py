@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
+from .i18n.bundle import bundles
 
 
 def all_settings(request):
@@ -16,3 +17,6 @@ def all_settings(request):
         'settings': settings_to_print
     }
 
+
+def i18n_settings(request):
+    return {'bundles': bundles}
