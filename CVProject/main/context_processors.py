@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from .i18n.bundle import bundles
+from .i18n.i18n_openai import languages
 
 
 def all_settings(request):
@@ -19,4 +20,12 @@ def all_settings(request):
 
 
 def i18n_settings(request):
-    return {'bundles': bundles}
+    lang = "eng"
+    if request.GET:
+        lang = request.GET.get('lang', "ikt")
+
+    return {
+        'bundles': bundles,
+        'languages': languages,
+        'curr_lang': lang
+    }

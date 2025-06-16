@@ -10,7 +10,30 @@
 </head>
 <body>
 
-    <h1>{{ bundles.PAGE_TITLE }}</h1>
+<script type="application/javascript">
+     function goToPage() {
+        const targetLanguage = document.getElementById("languageDropdown").value;
+        document.location = "?lang=" + targetLanguage;
+     }
+</script>
+
+    <div class="header">
+        <h1>{{ bundles.PAGE_TITLE }}</h1>
+        <select class="btn btn-secondary dropdown-toggle"
+                id="languageDropdown"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onchange="javascript: goToPage()"
+        >
+            {% for item in languages %}
+            <option class="dropdown-item" value="{{ item.code }}"
+                    {% if item.code == curr_lang %}
+                    selected="selected"
+                    {% endif %}>{{ item.language }}</option>
+            {% endfor %}
+        </select>
+    </div>
 
     <div class="container">
     <div class="main-body">
