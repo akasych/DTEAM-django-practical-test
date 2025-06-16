@@ -13,10 +13,7 @@ def home_page(request):
 
 def cv_page(request, cv_id):
     cv: CVDoc = get_cv(cv_id)
-    context = {
-        "cv": cv,
-        "bundles": bundles
-    }
+    context = {"cv": cv}
 
     # Send email if POST request is received
     if request.POST and request.POST['email']:
