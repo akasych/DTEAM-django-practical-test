@@ -7,6 +7,9 @@ class CVDoc(models.Model):
         indexes = [
             models.Index(fields=['id', 'lastname'])
         ]
+        verbose_name = "CV"
+        verbose_name_plural = "CVs"
+
     firstname = models.CharField(max_length=120)
     lastname = models.CharField(max_length=120)
     email = models.CharField(max_length=120)
@@ -22,7 +25,7 @@ class CVDoc(models.Model):
         return f"{self.firstname}{self.lastname}CV.pdf"
 
     def __str__(self):
-        return f"{self.get_full_name()} CV"
+        return f"{self.full_name} CV"
 
 
 class Project(models.Model):
@@ -35,16 +38,16 @@ class Project(models.Model):
     cvDoc = models.ForeignKey(CVDoc, on_delete=models.CASCADE, related_name='projects')
 
     def __str__(self):
-        return f"{self.cvDoc.get_full_name()}'s project {self.title}"
+        return f"{self.cvDoc.full_name}'s project {self.title}"
 
 
 class Skill(models.Model):
-    title = models.CharField(max_length=30)
-    experience = models.IntegerField()
+    title = models.CharField(max_length=30, verbose_name='Skill')
+    experience = models.IntegerField(verbose_name='Years')
     cvDoc = models.ForeignKey(CVDoc, on_delete=models.CASCADE, related_name='skills')
 
     def __str__(self):
-        return f"{self.cvDoc.get_full_name()} {self.title}: {self.experience} years"
+        return f"{self.cvDoc.full_name} {self.title}: {self.experience} years"
 
 
 class RequestLog(models.Model):
