@@ -80,10 +80,10 @@
                   <hr>
                   <div class="row">
                     <div class="col-sm-12">
-                        <a class="btn btn-info" target="_blank" href="/cv-pdf/{{cv.id}}/{{cv.pdf_file_name}}">{{ bundles.BUTTON_DOWNLOAD_CV_PDF }}</a>
+                        <a class="btn btn-info" target="_blank" href="{% url 'cv-pdf' cv.id cv.pdf_file_name %}">{{ bundles.BUTTON_DOWNLOAD_CV_PDF }}</a>
                         <div class="email">
                         {% if not email_sent_to %}
-                            <form action="/cv/{{cv.id}}/" method="post">
+                            <form action="{% url 'cv' cv.id %}" method="POST">
                                 {% csrf_token %}
                                 <input type="text" name="email" placeholder="{{ bundles.INPUT_EMAIL_ENTER }}..." />
                                 <button type="submit" class="btn btn-info" >{{ bundles.BUTTON_SEND_PDF }}</button>

@@ -12,7 +12,7 @@
 
         <div class="list-group">
          {% for cv in all_cvs %}
-            <a href="/cv/{{cv.id}}/" class="list-group-item list-group-item-action" aria-current="true">
+            <a href="{% url 'cv' cv.id %}" class="list-group-item list-group-item-action" aria-current="true">
                 {{cv.name}}
             </a>
          {% endfor %}
@@ -24,10 +24,10 @@
     <!-- Footer -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/logs/">{{ bundles.PAGE_LOGS }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'logs' %}">{{ bundles.PAGE_LOGS }}</a></li>
         </ol>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/settings/">{{ bundles.PAGE_SETTINGS }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'settings' %}">{{ bundles.PAGE_SETTINGS }}</a></li>
         </ol>
     </nav>
     <!-- /Footer -->

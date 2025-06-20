@@ -41,7 +41,7 @@
           <!-- Breadcrumb -->
           <nav aria-label="breadcrumb" class="main-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="/">{{ bundles.PAGE_HOME }}</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ bundles.PAGE_HOME }}</a></li>
                 {% block breadcrumbs %}
                 {% endblock %}
             </ol>
