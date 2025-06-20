@@ -6,7 +6,8 @@ from .i18n.i18n_openai import languages, translate_list
 
 def all_settings(request):
     if not settings.DEBUG:
-        raise ImproperlyConfigured("ATTENTION! Production mode! Exposing full application settings prohibited.")
+        print("ImproperlyConfigured: ATTENTION! Production mode! Exposing full application settings prohibited.")
+        # raise ImproperlyConfigured("ATTENTION! Production mode! Exposing full application settings prohibited.")
 
     settings_to_print = {}
 

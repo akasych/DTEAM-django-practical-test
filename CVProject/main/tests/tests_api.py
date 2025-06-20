@@ -11,7 +11,7 @@ class TestAPI(APITestCase):
     def test_retrieve_data(self):
         response = self.client.get('http://testserver/api/cv/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.content, b'[{"id":1,"skills":[],"projects":[],"total_experience":0,"firstname":"John","lastname":"Smith","email":"john@smith","phone":"","profession":""}]')
+        self.assertEqual(response.content, b'[{"id":1,"skills":[],"projects":[],"total_experience":0,"firstname":"John","lastname":"Smith","email":"john@smith","phone":"","profession":"","avatar":null}]')
 
     def test_create_data(self):
         response = self.client.post(url='http://testserver/api/add/', json={
