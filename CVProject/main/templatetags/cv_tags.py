@@ -18,7 +18,8 @@ def show_logs():
 def list_all_cvs() -> [dict]:
     return [{
         "id": cv.id,
-        "name": cv.full_name
+        "name": cv.full_name,
+        "thumb": cv.thumb
     } for cv in
         CVDoc.objects.all().order_by("lastname")
     ]

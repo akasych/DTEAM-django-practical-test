@@ -1,5 +1,11 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from PIL import Image, ImageDraw
+
+
+def avatar_upload_path(instance, filename) -> str:
+    return f'avatars/{instance.firstname}{instance.lastname}/{filename}'
 
 
 class CVDoc(models.Model):
@@ -15,7 +21,7 @@ class CVDoc(models.Model):
     email = models.CharField(max_length=120)
     phone = models.CharField(max_length=20, default='', blank=True)
     profession = models.CharField(max_length=100, default='', blank=True)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(upload_to=avatar_upload_path, null=True, blank=True)
 
     @property
     def full_name(self) -> str:
@@ -24,6 +30,31 @@ class CVDoc(models.Model):
     @property
     def pdf_file_name(self) -> str:
         return f"{self.firstname}{self.lastname}CV.pdf"
+
+    @property
+    def thumb(self) -> str | None:
+        if not self.avatar:
+            return None
+        return self._thumb_upload_path(self.avatar.url)
+
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.avatar:
+            self._make_thumbnail()
+
+    def _thumb_upload_path(self, path: str = "", new_ext: str = "png") -> str:
+        path_spl: list = path.split(".")
+        del path_spl[-1]  # drop original extension and save PNG by default after resize
+        return ".".join(path_spl) + "_thumb" + "." + new_ext
+
+    def _make_thumbnail(self):
+        max_size = (50, 50)   # Resize avatar to thumbnail 50x50 max
+        avatar_path = self.avatar.path
+        img = Image.open(avatar_path)
+        img.thumbnail(max_size)
+        img.save(self._thumb_upload_path(avatar_path))
+
 
     def __str__(self):
         return f"{self.full_name} CV"

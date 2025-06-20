@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load cv_tags %}
+{% load static %}
 
 {% block breadcrumbs %}
               <li class="breadcrumb-item active" aria-current="page">{{ bundles.PAGE_CV_LIST }}</li>
@@ -13,7 +14,14 @@
         <div class="list-group">
          {% for cv in all_cvs %}
             <a href="{% url 'cv' cv.id %}" class="list-group-item list-group-item-action" aria-current="true">
-                {{cv.name}}
+                <div>
+                  {% if cv.thumb %}
+                    <img src="{{ cv.thumb }}" alt="{{cv.name}}" class="rounded-circle" width="50">
+                  {% else %}
+                    <img src="{% static '/no-avatar.png' %}" class="rounded-circle" width="50">
+                  {% endif %}
+                    <span>{{cv.name}}</span>
+                </div>
             </a>
          {% endfor %}
         </div>
