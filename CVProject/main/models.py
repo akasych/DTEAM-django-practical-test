@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -38,23 +39,27 @@ class CVDoc(models.Model):
         return self._thumb_upload_path(self.avatar.url)
 
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.avatar:
-            self._make_thumbnail()
-
     def _thumb_upload_path(self, path: str = "", new_ext: str = "png") -> str:
         path_spl: list = path.split(".")
         del path_spl[-1]  # drop original extension and save PNG by default after resize
         return ".".join(path_spl) + "_thumb" + "." + new_ext
 
-    def _make_thumbnail(self):
+    def make_thumbnail(self):
         max_size = (50, 50)   # Resize avatar to thumbnail 50x50 max
         avatar_path = self.avatar.path
         img = Image.open(avatar_path)
         img.thumbnail(max_size)
         img.save(self._thumb_upload_path(avatar_path))
 
+    def delete_avatar_files(self):
+        if self.avatar:
+            # delete avatar and thumbnail image
+            avatar_path = self.avatar.path
+            thumb_path = self._thumb_upload_path(avatar_path)
+            if os.path.isfile(avatar_path):
+                os.remove(avatar_path)
+            if os.path.isfile(thumb_path):
+                os.remove(thumb_path)
 
     def __str__(self):
         return f"{self.full_name} CV"
