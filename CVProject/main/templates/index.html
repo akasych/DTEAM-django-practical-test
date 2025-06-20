@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cv_tags %}
 
 {% block breadcrumbs %}
               <li class="breadcrumb-item active" aria-current="page">{{ bundles.PAGE_CV_LIST }}</li>
@@ -6,6 +7,9 @@
 
 
 {% block content %}
+
+        {% cv_list as all_cvs %}
+
         <div class="list-group">
          {% for cv in all_cvs %}
             <a href="/cv/{{cv.id}}/" class="list-group-item list-group-item-action" aria-current="true">
