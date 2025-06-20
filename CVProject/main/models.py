@@ -15,6 +15,7 @@ class CVDoc(models.Model):
     email = models.CharField(max_length=120)
     phone = models.CharField(max_length=20, default='', blank=True)
     profession = models.CharField(max_length=100, default='', blank=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
 
     @property
     def full_name(self) -> str:

@@ -17,3 +17,6 @@ venv.bak/
 
 # local scripts
 *.bat
+
+# media files
+media/

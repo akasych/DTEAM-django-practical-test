@@ -17,6 +17,7 @@ def cv_page(request, cv_id):
     # Send email if POST request is received
     if request.POST and request.POST['email']:
         email = request.POST['email']
+        context["bundles"] = bundles
         pdf_content = generate_pdf(template_name='cv_pdf.html', context=context).getvalue()
         send_cv_to_email.delay(pdf_content, cv.pdf_file_name, cv.full_name, email)
         context['email_sent_to'] = email

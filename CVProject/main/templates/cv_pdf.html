@@ -12,7 +12,11 @@
     <table>
         <tr>
             <td>
-                <img src="{% static '/avatar_bob.png' %}" alt="...">
+              {% if cv.avatar %}
+                <img src="{{ cv.avatar.url }}" alt="{{cv.full_name}}" class="rounded-circle" width="200">
+              {% else %}
+                <img src="{% static '/no-avatar.png' %}" class="rounded-circle" width="150">
+              {% endif %}
             </td>
             <td>
 {% if cv.profession %}

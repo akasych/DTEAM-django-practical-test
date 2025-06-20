@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import home_page, log_page, settings_page, cv_page, cv_pdf
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import *
 
 
 urlpatterns = [
@@ -8,4 +10,4 @@ urlpatterns = [
     path('settings/',  settings_page, name='settings'),
     path('cv/<int:cv_id>/',  cv_page, name='cv'),
     path('cv-pdf/<int:cv_id>/<str:file_name>', cv_pdf, name='cv-pdf'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
